@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Colors from './components/Colors/Colors';
+import Profile from './components/Colors/Profile';
+import Login from './components/Form/Login';
+import { useAuth } from './firebaseConfig';
 
 function App() {
+  const currentUser = useAuth();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className={
+        currentUser
+          ? 'bg-white h-full w-full'
+          : 'w-full flex flex-col items-center justify-center h-full gap-1'
+      }
+    >
+      {currentUser && (
+        <>
+          <Profile />
+          <Colors />
+        </>
+      )}
+      <Login />
     </div>
   );
 }
